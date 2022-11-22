@@ -154,9 +154,9 @@ app.get('/filter',(req,res)=>{
         }
         
     }
-    if(Discount==0){
-        query.Discount=Discount
-    }
+    // if(Discount==0){
+    //     query.Discount=Discount
+    // }
     db.collection('products').find(query).toArray((err,result) => {
         if(err) throw err;
         res.send(result)
