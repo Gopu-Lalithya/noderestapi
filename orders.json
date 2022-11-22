@@ -1,0 +1,62 @@
+[
+    {
+        "_id": "62514d42f5aec503b2e0f2a9",
+        "order_id":1,
+        "name": "Lalithya",
+        "email": "lalithya@gmail.com",
+        "address": "Hno 23,Sector 1",
+        "phone": 768768686,
+        "cost": 985,
+        "menuItem": [
+            3,
+            5,
+            7
+        ],
+        "status": "Pending"
+    },
+    {
+        "_id": "62514d69f5aec503b2e0f2aa",
+        "order_id":2,
+        "name": "Naga",
+        "email": "naga@gmail.com",
+        "address": "Hno 23,Sector 1",
+        "phone": 768768686,
+        "cost": 10941,
+        "menuItem": [
+            6,
+            34,
+            23
+        ],
+        "status": "Pending"
+    },
+    {
+        "_id": "62514d77f5aec503b2e0f2ab",
+        "order_id":3,
+        "name": "Kumar",
+        "email": "kumar@gmail.com",
+        "address": "Hno 23,Sector 1",
+        "phone": 768768686,
+        "cost": 24631,
+        "menuItem": [
+            12,
+            45,
+            21
+        ],
+        "status": "Pending"
+    },
+    {
+        "_id": "62514d8bf5aec503b2e0f2ac",
+        "order_id":4,
+        "name": "Santosh",
+        "email": "santosh@gmail.com",
+        "address": "Hno 23,Sector 1",
+        "phone": 97876733,
+        "cost": 59227,
+        "menuItem": [
+            34,
+            26,
+            17
+        ],
+        "status": "Pending"
+    }
+]
