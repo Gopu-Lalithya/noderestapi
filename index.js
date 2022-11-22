@@ -52,7 +52,7 @@ app.get('/filter',(req,res)=>{
     if(Category_id&&Discount && Customer_rating && Brand){
         query={
             "Category_id": Category_id,
-            "Discount": Discount,
+            $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand,
             "Customer_rating": Customer_rating
         }
@@ -60,7 +60,7 @@ app.get('/filter',(req,res)=>{
     else if(Category_id&&Discount && Customer_rating){
         query={
             "Category_id": Category_id,
-            "Discount": Discount,
+            $and:[{Discount:{$gte:Discount}}],
             "Customer_rating": Customer_rating
         }
     }
@@ -74,14 +74,14 @@ app.get('/filter',(req,res)=>{
     else if(Category_id&&Discount && Brand){
         query={
             "Category_id": Category_id,
-            "Discount": Discount,
+            $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand
             
         }
     }
     else if(Discount && Customer_rating && Brand){
         query={
-            "Discount": Discount,
+            $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand,
             "Customer_rating": Customer_rating
             
@@ -90,7 +90,7 @@ app.get('/filter',(req,res)=>{
     else if(Category_id&&Discount){
         query={ 
             "Category_id": Category_id,           
-            "Discount": Discount,            
+            $and:[{Discount:{$gte:Discount}}],            
         }
     }
     else if(Category_id&&Brand){
@@ -107,7 +107,7 @@ app.get('/filter',(req,res)=>{
     }
     else if(Discount && Customer_rating){
         query={   
-            "Discount": Discount,         
+            $and:[{Discount:{$gte:Discount}}],         
             "Customer_rating": Customer_rating,           
         }
     }
@@ -119,7 +119,7 @@ app.get('/filter',(req,res)=>{
     }
     else if(Discount && Brand){
         query={   
-            "Discount": Discount,
+            $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand           
         }
     }
@@ -132,7 +132,7 @@ app.get('/filter',(req,res)=>{
     else if(Discount){
         query={ 
                       
-            "Discount": Discount,            
+            $and:[{Discount:{$gte:Discount}}],            
         }
     }
     else if(Brand){
