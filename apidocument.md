@@ -1,19 +1,19 @@
 // page1
 >default
-*http://localhost:9800/
+*https://flipkartapi.onrender.com/
 >list of categories
-*http://localhost:9800/categories
+*https://flipkartapi.onrender.com/categories
 >list of products
-*http://localhost:9800/products
+*https://flipkartapi.onrender.com/products
 >list of products based on its name
 
 //page2
 >products wrt category, brand, customerrating,discount combinations
-*http://localhost:9800/filter?Category_id=4&Discount=28&Customer_rating=4.3&Brand=Asus
+*https://flipkartapi.onrender.com/filter?Category_id=4&Discount=28&Customer_rating=4.3&Brand=Asus
 
 //page3
 >Details of product
-*http://localhost:9800/details/100
+*https://flipkartapi.onrender.com/details/100
 body
 {
     "id":[
@@ -24,9 +24,9 @@ body
 }
 //page4
 >order item details(POST)
-http://localhost:9800/orderItem
+*https://flipkartapi.onrender.com/orderItem
 >Pace Order(POST)
-*http://localhost:9800/placeOrder
+*https://flipkartapi.onrender.com/placeOrder
 body
 {
         
@@ -44,12 +44,12 @@ body
 
 //Page5
 >list of orders
-*http://localhost:9800/orders
+*https://flipkartapi.onrender.com/orders
 >List of orders wrt to email
-*http://localhost:9800/orders?email=lalithya@gmail.com
+*https://flipkartapi.onrender.com/orders?email=lalithya@gmail.com
 
 >Update Payment Details(PUT)
-*http://localhost:9800/updateOrder/5
+*https://flipkartapi.onrender.com/updateOrder/5
 body
 {
     
