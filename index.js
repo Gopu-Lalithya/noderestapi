@@ -82,11 +82,12 @@ app.get('/filter/:Category_id',(req,res)=>{
             "Category_id": Category_id,
             $and:[
 				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
-				
+				{$and:[{Discount:{$gte:Discount}}]},
+                {$and:[{Customer_rating:{$gte:Customer_rating}}]},
 			],
-            $and:[{Discount:{$gte:Discount}}],
+            
             "Brand": Brand,
-            "Customer_rating": Customer_rating
+            
         }
     }
     else if(lcost && hcost&&Discount && Customer_rating){
@@ -94,10 +95,11 @@ app.get('/filter/:Category_id',(req,res)=>{
             "Category_id": Category_id,
             $and:[
 				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
-				
+				{$and:[{Discount:{$gte:Discount}}]},
+                {$and:[{Customer_rating:{$gte:Customer_rating}}]},
 			],
-            $and:[{Discount:{$gte:Discount}}],
-            "Customer_rating": Customer_rating
+            
+            
         }
     }
     else if(lcost && hcost&&Customer_rating && Brand){
@@ -105,10 +107,11 @@ app.get('/filter/:Category_id',(req,res)=>{
             "Category_id": Category_id,
             $and:[
 				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+                {$and:[{Customer_rating:{$gte:Customer_rating}}]},
 				
 			],
             "Brand": Brand,
-            "Customer_rating": Customer_rating
+            
         }
     }
     else if(lcost && hcost&&Discount && Brand){
@@ -126,9 +129,12 @@ app.get('/filter/:Category_id',(req,res)=>{
     else if(Discount && Customer_rating && Brand){
         query={
             "Category_id": Category_id,
-            $and:[{Discount:{$gte:Discount}}],
+            $and:[
+                {$and:[{Discount:{$gte:Discount}}]},
+                {$and:[{Customer_rating:{$gte:Customer_rating}}]},
+            ],
             "Brand": Brand,
-            "Customer_rating": Customer_rating
+            
             
         }
     }
@@ -137,9 +143,10 @@ app.get('/filter/:Category_id',(req,res)=>{
             "Category_id": Category_id,
             $and:[
 				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+                {$and:[{Discount:{$gte:Discount}}]}
 				
 			],           
-            $and:[{Discount:{$gte:Discount}}],            
+                        
         }
     }
     else if(lcost && hcost&&Brand){
@@ -157,23 +164,26 @@ app.get('/filter/:Category_id',(req,res)=>{
             "Category_id": Category_id,  
             $and:[
 				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
-				
+				{$and:[{Customer_rating:{$gte:Customer_rating}}]},
 			],         
-            "Customer_rating": Customer_rating,           
+                      
         }
     }
     else if(Discount && Customer_rating){
         query={ 
             "Category_id": Category_id,  
-            $and:[{Discount:{$gte:Discount}}],         
-            "Customer_rating": Customer_rating,           
+            $and:[
+				{$and:[{Customer_rating:{$gte:Customer_rating}}]},
+                {$and:[{Discount:{$gte:Discount}}]}
+				
+			],           
         }
     }
     else if(Customer_rating && Brand){
         query={ 
             "Category_id": Category_id,  
             "Brand": Brand,         
-            "Customer_rating": Customer_rating,           
+            $and:[{Customer_rating:{$gte:Customer_rating}}],          
         }
     }
     else if(Discount && Brand){
@@ -210,7 +220,7 @@ app.get('/filter/:Category_id',(req,res)=>{
         query={ 
             "Category_id": Category_id,  
                      
-            "Customer_rating": Customer_rating          
+            $and:[{Customer_rating:{$gte:Customer_rating}}],         
         }
     }
     else{
