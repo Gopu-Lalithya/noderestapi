@@ -6,6 +6,7 @@
 >list of products
 *https://flipkartapi.onrender.com/products
 >list of products based on its name
+*https://flipkartapi.onrender.com/products?name=realme%209
 
 //page2
 >products wrt category, brand, customerrating,discount combinations

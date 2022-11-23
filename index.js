@@ -22,12 +22,12 @@ app.get('/',(req,res) => {
 })
 //list of categories ROUTE
 app.get('/categories',(req,res)=>{
-    db.collection('categories').find().toArray((err,result) => {
+    db.collection('category').find().toArray((err,result) => {
         if(err) throw err;
         res.send(result)
     })
 })
-//list of products ROUTE
+//list of products wrt name ROUTE
 app.get('/products',(req,res)=>{
     let Category_id = Number(req.query.Category_id);
 	let name = req.query.name;
@@ -52,14 +52,7 @@ app.get('/products',(req,res)=>{
         res.send(result)
     })
 })
-// list of products based on its categories
-app.get('/products/:Categoryid',(req,res)=>{
-    let Categoryid = Number(req.params.Categoryid)
-    db.collection('products').find({Category_id:Categoryid}).toArray((err,result) => {
-        if(err) throw err;
-        res.send(result)
-    })
-})
+
 //filter of products
 app.get('/filter/:Category_id',(req,res)=>{
     let Category_id=Number(req.params.Category_id);
