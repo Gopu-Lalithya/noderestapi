@@ -20,16 +20,34 @@ app.use(cors())
 app.get('/',(req,res) => {
     res.send('Hii from Express')
 })
-//list of categories
+//list of categories ROUTE
 app.get('/categories',(req,res)=>{
     db.collection('categories').find().toArray((err,result) => {
         if(err) throw err;
         res.send(result)
     })
 })
-//list of products
+//list of products ROUTE
 app.get('/products',(req,res)=>{
-    db.collection('products').find().toArray((err,result) => {
+    let Category_id = Number(req.query.Category_id);
+	let name = req.query.name;
+	let query = {};
+	// category 
+	if(Category_id){
+		query = {
+			"Category_id":Category_id
+		}
+	}
+	//name
+	else if(name){
+		query = {
+			"Product_name":name
+		}
+	}
+	else {
+		query = {}
+	}
+    db.collection('products').find(query).toArray((err,result) => {
         if(err) throw err;
         res.send(result)
     })
@@ -42,38 +60,64 @@ app.get('/products/:Categoryid',(req,res)=>{
         res.send(result)
     })
 })
-app.get('/filter',(req,res)=>{
-    let Category_id=Number(req.query.Category_id);
+//filter of products
+app.get('/filter/:Category_id',(req,res)=>{
+    let Category_id=Number(req.params.Category_id);
     let Brand = req.query.Brand;
+    let lcost = Number(req.query.lcost);
+	let hcost = Number(req.query.hcost);
     let Customer_rating = Number(req.query.Customer_rating);
     let Discount = Number(req.query.Discount);
     let query = {}
     
-    if(Category_id&&Discount && Customer_rating && Brand){
+    // sort by cost
+	let sort = {"Selling_price":1};
+	if(req.query.sort){
+		sort = {"Selling_price": Number(req.query.sort)}
+	} 
+
+
+    if(lcost && hcost&&Discount && Customer_rating && Brand){
         query={
             "Category_id": Category_id,
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],
             $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand,
             "Customer_rating": Customer_rating
         }
     }
-    else if(Category_id&&Discount && Customer_rating){
+    else if(lcost && hcost&&Discount && Customer_rating){
         query={
             "Category_id": Category_id,
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],
             $and:[{Discount:{$gte:Discount}}],
             "Customer_rating": Customer_rating
         }
     }
-    else if(Category_id&&Customer_rating && Brand){
+    else if(lcost && hcost&&Customer_rating && Brand){
         query={
             "Category_id": Category_id,
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],
             "Brand": Brand,
             "Customer_rating": Customer_rating
         }
     }
-    else if(Category_id&&Discount && Brand){
+    else if(lcost && hcost&&Discount && Brand){
         query={
             "Category_id": Category_id,
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],
             $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand
             
@@ -81,74 +125,97 @@ app.get('/filter',(req,res)=>{
     }
     else if(Discount && Customer_rating && Brand){
         query={
+            "Category_id": Category_id,
             $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand,
             "Customer_rating": Customer_rating
             
         }
     }
-    else if(Category_id&&Discount){
+    else if(lcost && hcost&&Discount){
         query={ 
-            "Category_id": Category_id,           
+            "Category_id": Category_id,
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],           
             $and:[{Discount:{$gte:Discount}}],            
         }
     }
-    else if(Category_id&&Brand){
-        query={   
-            "Category_id": Category_id,         
+    else if(lcost && hcost&&Brand){
+        query={ 
+            "Category_id": Category_id,  
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],         
             "Brand": Brand            
         }
     }
-    else if(Category_id&&Customer_rating){
-        query={   
-            "Category_id": Category_id,         
+    else if(lcost && hcost&&Customer_rating){
+        query={ 
+            "Category_id": Category_id,  
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],         
             "Customer_rating": Customer_rating,           
         }
     }
     else if(Discount && Customer_rating){
-        query={   
+        query={ 
+            "Category_id": Category_id,  
             $and:[{Discount:{$gte:Discount}}],         
             "Customer_rating": Customer_rating,           
         }
     }
     else if(Customer_rating && Brand){
-        query={   
+        query={ 
+            "Category_id": Category_id,  
             "Brand": Brand,         
             "Customer_rating": Customer_rating,           
         }
     }
     else if(Discount && Brand){
-        query={   
+        query={
+            "Category_id": Category_id,   
             $and:[{Discount:{$gte:Discount}}],
             "Brand": Brand           
         }
     }
-    else if(Category_id){
+    else if(lcost && hcost){
         query={ 
-            "Category_id": Category_id,           
+            "Category_id": Category_id,
+            $and:[
+				{$and:[{"Selling_price":{$gt:lcost,$lt:hcost}}]},
+				
+			],           
                       
         }
     }
     else if(Discount){
-        query={ 
-                      
-            $and:[{Discount:{$gte:Discount}}],            
+        query={
+            "Category_id": Category_id,
+            $and:[{Discount:{$gte:Discount}}]            
         }
     }
     else if(Brand){
-        query={   
+        query={ 
+            "Category_id": Category_id,  
                      
             "Brand": Brand            
         }
     }
     else if(Customer_rating){
-        query={   
+        query={ 
+            "Category_id": Category_id,  
                      
-            "Customer_rating": Customer_rating,           
+            "Customer_rating": Customer_rating          
         }
     }
     else{
-        query={   
+        query={ 
+            "Category_id": Category_id,  
                   
                      
         }

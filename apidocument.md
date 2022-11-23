@@ -57,3 +57,5 @@ body
     "bank_name": "SBI",
     "date": "20/11/22"       
 }
+>Delete Order(Delete)
+*https://flipkartapi.onrender.com/deleteOrder/637ce4551f3c891de689e0a4
